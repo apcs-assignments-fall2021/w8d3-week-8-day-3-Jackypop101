@@ -17,9 +17,95 @@ public class Rational
         denominator = b;
     }
 
-    // *****
-    // You should go ahead and copy and paste the methods
-    // from last class into here:
+    // ***** }
+
+    // This method takes two Rationals, add them up,
+    // and returns a Rational equal to the sum
+    // You will need to:
+    // 1) Calculate the value of the new numerator
+    // 2) Calculate the value of the new denominator
+    // 3) Create a new Rational variable with the two above values
+    // 4) Return your new Rational variable
+    // (When you write the simplify method later on, you should
+    // also call it in this method to return the simplified result)
+    public static Rational add(Rational r, Rational s) {
+        int rn = r.numerator;
+        int rd = r.denominator;
+        int sn = s.numerator;
+        int sd = s.denominator;
+
+        int new_numerator = rn*sd + sn* rd;
+        int new_denominator = rd * sd;
+
+        Rational x = new Rational(new_numerator,new_denominator);
+        return Rational.simplify(x);
+    }
+
+    // This method takes two Rationals, subtracts thems up,
+    // and returns a Rational equal to the difference
+    public static Rational subtract(Rational r, Rational s) {
+        int rn = r.numerator;
+        int rd = r.denominator;
+        int sn = s.numerator;
+        int sd = s.denominator;
+
+        int new_numerator = rn*sd - sn* rd;
+        int new_denominator = rd * sd;
+
+        Rational x = new Rational(new_numerator,new_denominator);
+        return Rational.simplify(x);
+
+    }
+
+    public static Rational multiply(Rational r, Rational s) {
+        int rn = r.numerator;
+        int rd = r.denominator;
+        int sn = s.numerator;
+        int sd = s.denominator;
+
+        int new_numerator = rn * sn;
+        int new_denominator = rd * sd;
+
+        Rational x = new Rational(new_numerator,new_denominator);
+        return Rational.simplify(x);
+    }
+
+    public static Rational divide(Rational r, Rational s) {
+        int rn = r.numerator;
+        int rd = r.denominator;
+        int sn = s.numerator;
+        int sd = s.denominator;
+
+        int new_numerator = rn*sd;
+        int new_denominator = rd * sn;
+
+        Rational x = new Rational(new_numerator,new_denominator);
+        return Rational.simplify(x);
+    }
+
+    // Finds the greatest common factor between a and b
+    // To find the greatest common factor, find the largest number x
+    // such that a and b are both multiples of x
+    public static int greatestCommonFactor(int a, int b){
+        for (int i = a; i > 0; i--){
+            if (b % i == 0){
+                return i;
+            }
+        }
+        return 1;
+    }
+
+    // This method is given a rational, and returns a simplified version
+    // of the input rational
+    // Use the greatestCommonFactor method here
+    // e.g. simplify(2/4) => 1/2
+    //      simplify(1/2) => 1/2
+    public static Rational simplify(Rational r) {
+        int y = greatestCommonFactor(r.numerator, r.denominator);
+        Rational x = new Rational(r.numerator/y,r.denominator/y);
+        return x;
+    }
+
     // *****
 
 
@@ -44,7 +130,7 @@ public class Rational
     // Rational r = new Rational(5,2);
     // System.out.println(r.isImproper()) // true
     public boolean isImproper() {
-       return (this.numerator >= this.denominator);
+        return (this.numerator >= this.denominator);
     }
 
     // Returns whether or not the Rational is currently simplified
@@ -53,7 +139,12 @@ public class Rational
     // Rational r = new Rational(6,12);
     // System.out.println(r.isSimplified()) // false
     public boolean isSimplified() {
-        return false; // YOUR CODE HERE
+        Rational x = new Rational(this.numerator, this.denominator);
+        x = simplify(x);
+        if (x.numerator == this.numerator){
+            return true;
+        }
+        return false;
     }
 
     // Calculates the double value of our Rational
@@ -61,15 +152,21 @@ public class Rational
     // Rational r = new Rational(3,4);
     // System.out.println(r.calculateDecimalValue()) // 0.75
     public double calculateDecimalValue() {
-        return 0.0; // YOUR CODE HERE
+        return ((double)this.numerator/this.denominator);
     }
-
     // Returns the Rational we get from raising the rational number to an integer power
     // Example:
     // Rational r = new Rational(2,5);
     // System.out.println(r.pow(2)) // 4/25
     public Rational pow(int exponent) {
-        return null; // YOUR CODE HERE
+        int x = this.numerator;
+        int y = this.denominator;
+        for (int i = 0; i < exponent; i++) {
+            this.numerator = this.numerator * x;
+            this.denominator = this.denominator * y;
+        }
+        Rational r = new Rational(numerator,denominator);
+        return r;
     }
 
     // Checks to see if either the numerator or denominator match a given number
