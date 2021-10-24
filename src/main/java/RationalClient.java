@@ -18,12 +18,12 @@ public class RationalClient {
          System.out.println(r.calculateDecimalValue()); // 0.75
 
         Rational s = new Rational(3,4);
-         System.out.println(s.calculateDecimalValue()) // 0.75
+         System.out.println(s.calculateDecimalValue()); // 0.75
 
         String x = "hello";
          char c = x.charAt(0);
 
          Rational q = new Rational(2,5);
-         System.out.println(q.pow(2)) // 4/25
+         System.out.println(q.pow(2)); // 4/25
     }
 }

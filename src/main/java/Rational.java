@@ -174,7 +174,10 @@ public class Rational
     // Rational r = new Rational(3,4);
     // System.out.println(r.contains(3)) // true
     public boolean contains(int x) {
-        return false; // YOUR CODE HERE
+    if ((this.numerator == x)||(this.denominator == x)){
+        return true;
+        }
+    return false;
     }
 
     // This returns a string representation of a Rational (e.g. "1/2")
@@ -232,7 +235,7 @@ public class Rational
     // Rational r = new Rational(3, 5);
     // r.increment(); // r is now 8/5
     public void increment() {
-        // YOUR CODE HERE
+        this.numerator = this.numerator + this.denominator;
     }
 
     // Decrements the current value of our Rational (decreases the value
@@ -241,7 +244,7 @@ public class Rational
     // Rational r = new Rational(6, 5);
     // r.decrement(); // r is now 1/5
     public void decrement() {
-        // YOUR CODE HERE
+        this.numerator = this.numerator - this.denominator;
     }
 
     // Given an int input representing the new denominator, changes the
@@ -250,7 +253,8 @@ public class Rational
     // Rational r = new Rational(3, 8);
     // r.changeToEquivalentFraction(64); // r is now 24/64 (which is equivalent to 3/8)
     public void changeToEquivalentFraction(int newDenominator) {
-        // YOUR CODE HERE
+        this.numerator = this.numerator * newDenominator/this.denominator;
+        this.denominator = newDenominator;
     }
 
     // **********
@@ -261,7 +265,10 @@ public class Rational
     // Rational r = new Rational(-3,4);
     // System.out.println(r.isNegative()) // true
     public boolean isNegative() { 
-        return false; // YOUR CODE HERE
+        if (this.numerator < 0){
+            return true;
+        }
+        return false;
     }
 
     // Calculates the reciprocal of a Rational number.
@@ -270,7 +277,10 @@ public class Rational
     // Rational r = new Rational(5,2);
     // System.out.println(r.reciprocal()) // 2/5
     public Rational reciprocal() {
-        return null; // YOUR CODE HERE
+        int x = this.numerator;
+        int y = this.denominator;
+        Rational z = new Rational(y,x);
+        return z;
     }
 
     // Checks whether the current Rational is the exactly the same as other
@@ -279,7 +289,10 @@ public class Rational
     // Rational s = new Rational(2,4);
     // System.out.println(r.equals(s)) // false
     public boolean equals(Rational other) {
-        return false; // YOUR CODE HERE
+        if ((this.numerator == other.numerator) && (this.denominator == other.denominator)){
+            return true;
+        }
+        return false;
     }
 
     // Rounds the current Rational to the nearest whole number value
@@ -287,7 +300,10 @@ public class Rational
     // Rational r = new Rational(3, 2);
     // r.round(); // r is now 2/1
     public void round() {
-        // YOUR CODE HERE
+    double x = this.numerator / this.denominator;
+    int y = (int) (x + 0.5);
+    this.numerator = y;
+    this.denominator = 1;
     }
 }
 
