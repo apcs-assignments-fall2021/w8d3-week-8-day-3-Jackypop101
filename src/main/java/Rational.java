@@ -161,7 +161,7 @@ public class Rational
     public Rational pow(int exponent) {
         int x = this.numerator;
         int y = this.denominator;
-        for (int i = 0; i < exponent; i++) {
+        for (int i = 0; i < exponent-1; i++) {
             this.numerator = this.numerator * x;
             this.denominator = this.denominator * y;
         }
@@ -265,7 +265,10 @@ public class Rational
     // Rational r = new Rational(-3,4);
     // System.out.println(r.isNegative()) // true
     public boolean isNegative() { 
-        if (this.numerator < 0){
+        if ((this.numerator <0)&&(this.denominator < 0)) {
+            return false;
+        }
+        else if ((this.numerator < 0)||(this.denominator < 0)){
             return true;
         }
         return false;
@@ -300,7 +303,7 @@ public class Rational
     // Rational r = new Rational(3, 2);
     // r.round(); // r is now 2/1
     public void round() {
-    double x = this.numerator / this.denominator;
+    double x = (double)this.numerator / (double)this.denominator;
     int y = (int) (x + 0.5);
     this.numerator = y;
     this.denominator = 1;
